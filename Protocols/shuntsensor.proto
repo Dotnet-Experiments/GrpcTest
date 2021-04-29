@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service ShuntReader {
+  rpc GetReadings(ShuntSensorGetReadingsRequest) returns (ShuntSensorGetReadingsResponse);
+  rpc GetReadingsStream(ShuntSensorGetReadingsStreamRequest) returns (stream ShuntSensorGetReadingsStreamResponse);
+}
+
+message ShuntSensorGetReadingsRequest {
+  string id = 1;
+  google.protobuf.Timestamp startDateTime = 2;
+  google.protobuf.Timestamp endDateTime = 3;
+}
+
+message ShuntSensorGetReadingsResponse {
+  google.protobuf.Timestamp dateTimeStamp = 1;
+  float currentInAmps = 2;
+  float voltageInVolts = 3;
+}
+
+message ShuntSensorGetReadingsStreamRequest {
+  string id = 1;
+}
+
+message ShuntSensorGetReadingsStreamResponse {
+  google.protobuf.Timestamp dateTimeStamp = 1;
+  float currentInAmps = 2;
+  float voltageInVolts = 3;
+}
